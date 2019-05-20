@@ -18,7 +18,7 @@ function init() {
 	});	
 	$('#config').show(300);
 	$('#stat').hide(300);
-	$('#extraStats').hide();
+	//$('#extraStats').hide();
 	
 }
 
@@ -47,12 +47,7 @@ function increment(obj) {
 }
 
 function addFields() {	
-	var curId = obj.id;
-	var counter = '#'+curId.substring(0, curId.length - 1);
-	//console.log(counter);	
-    $(counter).val( function(i, oldval) {
-        return ++oldval;
-    });
+	alert("addFields not available yet!");
 }
 
 function calcStat() {

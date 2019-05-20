@@ -33,6 +33,22 @@
 	margin: 1px 1px;
 }
 
+.extraStat {	
+	margin: 2px 2px;
+	padding: 2px 2px;
+	border: 1px;
+	border-color: black;
+	border-style: solid;	
+	border-radius: 4px;
+	background: #DDDDDD;
+	width: 230px;	
+}
+
+.extraStatButtons {	
+	display: flex;
+    align-items: center;  
+}
+
 .addButton {	
 	border-style: none;
 	padding: 4px 4px;		
@@ -46,20 +62,13 @@
 	font-size: 20px;
 	border-style: hidden;
 	width: 45px;	
-	 text-align: center; 
-}
-
-.containerBase {
-	display: flex;
-    align-items: center;  
-	width: 100px;	
+	text-align: center; 
 }
 
 .container {
 	display: flex;
     align-items: center;  
 	width: 100px;
-
 }
 
 .headline {    
@@ -110,19 +119,30 @@
 			</div>
 			<div class="container">
 				<img src="img/black.jpg" id="blacki" class="dice" />&nbsp;<input type="text" size="1" name="black" id="black" value="0" class="inputfield"/>
-				<img src="img/white.jpg" id="whitei" class="dice"/>&nbsp;<input type="text" size="1" name="white" id="white" value="0" class="inputfield"/><br />
+				<img src="img/white.jpg" id="whitei" class="dice"/>&nbsp;<input type="text" size="1" name="white" id="white" value="0" class="inputfield"/>
 			</div>
 			<br class="clear" />	
 			<div class="container">
 				<img src="img/red.jpg" id="redi" class="dice"/>&nbsp;<input type="text" size="1" name="red" id="red" value="0" class="inputfield"/>
-				<img src="img/green.jpg" id="greeni" class="dice"/>&nbsp;<input type="text" size="1" name="green" id="green" value="0" class="inputfield"/><br />
-			</div>
+				<img src="img/green.jpg" id="greeni" class="dice"/>&nbsp;<input type="text" size="1" name="green" id="green" value="0" class="inputfield"/>
+			</div>			
 			<div class="container">
 				<img src="img/yellow.jpg" id="yellowi" class="dice"/>&nbsp;<input type="text" size="1" name="yellow" id="yellow" value="0" class="inputfield"/>
-				<img src="img/blue.jpg" id="bluei" class="dice"/>&nbsp;<input type="text" size="1" name="blue" id="blue" value="0" class="inputfield"/><br />		
+				<img src="img/blue.jpg" id="bluei" class="dice"/>&nbsp;<input type="text" size="1" name="blue" id="blue" value="0" class="inputfield"/>		
 			</div>
 		</div>
-		<div id="extraStats" class="border">		
+		<div id="extraStats" class="border">	
+			<div class="extraStat">	
+				<div class="extraStatButtons">
+					<img src="img/surge.png" id="extrasurgei" class="dice" />&nbsp;<input type="text" size="1" name="extrasurge" id="extrasurge" value="0" class="inputfield"/>
+					<img src="img/strain.png" id="extrastraini" class="dice"/>&nbsp;<input type="text" size="1" name="extrastrain" id="extrastrain" value="0" class="inputfield"/>
+				</div>
+				<img src="img/arrowdown.png" />	
+				<div class="extraStatButtons">
+					<img src="img/hit.png" id="extrahiti" class="dice" />&nbsp;<input type="text" size="1" name="extrahit" id="hit" value="0" class="inputfield"/>
+					<img src="img/rw.png" id="extrarwi" class="dice"/>&nbsp;<input type="text" size="1" name="extrarw" id="extrarw" value="0" class="inputfield"/>
+				</div>
+			</div>
 		</div>
 		<div id="add" class="addButton">
 			<input type="button" value="+" id="add" onclick="addFields()" class="buttons" />			
