@@ -16,15 +16,25 @@ function init() {
 		//add the increment function to each dice image		
 		$(this).attr('onClick', 'increment(this);');		
 	});	
+	$('#config').show(300);
+	$('#stat').hide(300);
+	$('#extraStats').hide();
+	
 }
 
 function resetDice() {
+	$('#config').show(300);
+	$('#stat').hide(300);
 	$('.dice').each(function(index,obj) {
 		var curId = obj.id;
 		var counter = '#'+curId.substring(0, curId.length - 1);
 		//console.log(counter);		
 		$(counter).val(0);
 	});	
+}
+
+function toggleConf() {
+	$('#config').toggle(300);	
 }
 
 function increment(obj) {	
@@ -36,7 +46,21 @@ function increment(obj) {
     });
 }
 
+function addFields() {	
+	var curId = obj.id;
+	var counter = '#'+curId.substring(0, curId.length - 1);
+	//console.log(counter);	
+    $(counter).val( function(i, oldval) {
+        return ++oldval;
+    });
+}
+
 function calcStat() {
+	//toggle config
+	$('#config').hide(300);
+	$('#stat').show(300);
+	
+	//clear the old statistic
 	$("#stat ul").remove();
 	$("#stat").append('<ul id="statlist"></ul>');
 	
@@ -46,15 +70,14 @@ function calcStat() {
 	$('.inputfield').each( function(i, obj) {
 		var objval = $('#'+obj.id).val();					
 		if (objval>0) {
-			var curMaxReach = getMaxReach(obj.id);
-			if(maxreach<curMaxReach) {
-				maxreach = curMaxReach;
+			for (i = 0; i < objval; i++) {
+				maxreach = maxreach + getMaxReach(obj.id);
 			}
 		}		
 	});
 	//add the list entries to the list
 	console.log('Maximum reach: '+ maxreach);	
-	for (i = 1; i <= maxreach; i++) {
+	for (i = 0; i <= maxreach; i++) {
 		//calculate statistic for each reach	
 		//TODO: do the statistic calculation here
 		$('#statlist').append('<li>'+i+'<ul><li>Schaden:</li><li>Blitz:</li></ul></li>');

@@ -16,31 +16,68 @@
 }
 
 .dice {
+	border: 1px;
+	border-color: black;
+	border-style: solid;
+	margin: 1px 1px;
+}
+
+.border {
 	border: 2px;
 	border-color: black;
-	border-style: dotted;
+	border-style: solid;
+	padding: 4px 4px;
+	border-radius: 15px;
+	background: #EEEEEE;
+	width: 240;
+	margin: 1px 1px;
+}
+
+.addButton {	
+	border-style: none;
+	padding: 4px 4px;		
+	margin:2px;
+	width: 240;
+	display: flex;
+	justify-content: flex-end;    
 }
 
 .inputfield {
 	font-size: 20px;
 	border-style: hidden;
+	width: 45px;	
+	 text-align: center; 
+}
+
+.containerBase {
+	display: flex;
+    align-items: center;  
+	width: 100px;	
 }
 
 .container {
 	display: flex;
     align-items: center;  
 	width: 100px;
-	height: 70px;
+
+}
+
+.headline {    
+  color: black;
+  font-weight: bold;  
+  font-size: 16px;
+  font-family:Arial;
 }
 
 .buttons {    
   color: black;
-  padding: 10px 32px;
+  padding: 6px 20px;
   text-align: center;
   text-decoration: none;
+  font-weight: bold; 
   display: inline-block;
   font-size: 16px;
-  margin: 2px 2px;
+  margin: 1px 1px;
   cursor: pointer;	
 }
 
@@ -49,23 +86,46 @@
 <body>
 	<form name="formular">
 	<div id="menu">
-		<input type="button" value="Stastic" id="fstatistic" onclick="calcStat()" class="buttons" />&nbsp;&nbsp;
+		<input type="button" value="Stastic" id="fstatistic" onclick="calcStat()" class="buttons" />
 		<input type="button" value="Reset" id="reset" onclick="resetDice()" class="buttons" />
+		<input type="button" value="T" id="toggle" onclick="toggleConf()" class="buttons" />
 	</div>
-	<br class="clear" />
-	<div id="config" style="display:slide">
-		<div class="container">
-			<img src="img/black.jpg" id="blacki" class="dice" />&nbsp;<input type="text" size="3" name="black" id="black" value="0" class="inputfield"/>
-			<img src="img/white.jpg" id="whitei" class="dice"/>&nbsp;<input type="text" size="3" name="white" id="white" value="0" class="inputfield"/><br />
+	<div id="config">
+		<div id="initstats" class="border">
+			<div class="headline">
+				Basiswerte
+			</div>
+			<div class="container">
+				<img src="img/surge.png" id="surgei" class="dice" />&nbsp;<input type="text" size="1" name="surge" id="surge" value="0" class="inputfield"/>
+				<img src="img/strain.png" id="straini" class="dice"/>&nbsp;<input type="text" size="1" name="strain" id="strain" value="0" class="inputfield"/>
+			</div>
+			<div class="container">
+				<img src="img/hit.png" id="hiti" class="dice" />&nbsp;<input type="text" size="1" name="hit" id="hit" value="0" class="inputfield"/>
+				<img src="img/rw.png" id="rwi" class="dice"/>&nbsp;<input type="text" size="1" name="rw" id="rw" value="0" class="inputfield"/>
+			</div>
 		</div>
-		<br class="clear" />	
-		<div class="container">
-			<img src="img/red.jpg" id="redi" class="dice"/>&nbsp;<input type="text" size="3" name="red" id="red" value="0" class="inputfield"/>
-			<img src="img/green.jpg" id="greeni" class="dice"/>&nbsp;<input type="text" size="3" name="green" id="green" value="0" class="inputfield"/><br />
+		<div id="dices" class="border">
+			<div class="headline">
+				Würfel
+			</div>
+			<div class="container">
+				<img src="img/black.jpg" id="blacki" class="dice" />&nbsp;<input type="text" size="1" name="black" id="black" value="0" class="inputfield"/>
+				<img src="img/white.jpg" id="whitei" class="dice"/>&nbsp;<input type="text" size="1" name="white" id="white" value="0" class="inputfield"/><br />
+			</div>
+			<br class="clear" />	
+			<div class="container">
+				<img src="img/red.jpg" id="redi" class="dice"/>&nbsp;<input type="text" size="1" name="red" id="red" value="0" class="inputfield"/>
+				<img src="img/green.jpg" id="greeni" class="dice"/>&nbsp;<input type="text" size="1" name="green" id="green" value="0" class="inputfield"/><br />
+			</div>
+			<div class="container">
+				<img src="img/yellow.jpg" id="yellowi" class="dice"/>&nbsp;<input type="text" size="1" name="yellow" id="yellow" value="0" class="inputfield"/>
+				<img src="img/blue.jpg" id="bluei" class="dice"/>&nbsp;<input type="text" size="1" name="blue" id="blue" value="0" class="inputfield"/><br />		
+			</div>
 		</div>
-		<div class="container">
-			<img src="img/yellow.jpg" id="yellowi" class="dice"/>&nbsp;<input type="text" size="3" name="yellow" id="yellow" value="0" class="inputfield"/>
-			<img src="img/blue.jpg" id="bluei" class="dice"/>&nbsp;<input type="text" size="3" name="blue" id="blue" value="0" class="inputfield"/><br />		
+		<div id="extraStats" class="border">		
+		</div>
+		<div id="add" class="addButton">
+			<input type="button" value="+" id="add" onclick="addFields()" class="buttons" />			
 		</div>
 	</div>
 	<br />		
