@@ -10,6 +10,8 @@ var counterschaden=new Hash({red:[0,0,0,0,0,0],blue:[0,0,0,0,0,0],green:[0,0,0,0
 var counterblitz=new Hash({red:[0,0,0,0,0,0],blue:[0,0,0,0,0,0],green:[0,0,0,0,0,0],yellow:[0,0,0,0,0,0],black:[0,0,0,0,0,1],white:[0,0,1,1,1,0]});
 var block=new Hash({red:[0,0,0,0,0,0],blue:[0,0,0,0,0,0],green:[0,0,0,0,0,0],yellow:[0,0,0,0,0,0],black:[0,0,0,0,0,0],white:[0,0,0,0,0,1]});
 
+var extraFieldsCnt = 0;
+
 //called when the DOM is ready
 function init() {
 	$('.dice').each(function(index,obj) {
@@ -23,6 +25,10 @@ function init() {
 }
 
 function resetDice() {
+	extraFieldsCnt = 0;
+	$('#extraStats').hide();
+	$('#extraStats').empty();
+	
 	$('#config').show(300);
 	$('#stat').hide(300);
 	$('.dice').each(function(index,obj) {
@@ -31,6 +37,8 @@ function resetDice() {
 		//console.log(counter);		
 		$(counter).val(0);
 	});	
+	
+	
 }
 
 function toggleConf() {
@@ -47,7 +55,18 @@ function increment(obj) {
 }
 
 function addFields() {	
-	alert("addFields not available yet!");
+	if ($('#extraStats').css('display') == 'none' ) {		
+		$('#extraStats').show();
+	}
+	extraFieldsCnt += 1;
+	
+	//get the template for the content
+	var content = $('#extraStatTemplate').html();		
+	//replace the content XXX placholder with the current counter
+	content = content.replace(/XXX/gi,extraFieldsCnt);
+	
+	//add the fields to ui
+	$('#extraStats').append(content);		
 }
 
 function calcStat() {
@@ -60,18 +79,22 @@ function calcStat() {
 	$("#stat").append('<ul id="statlist"></ul>');
 	
 	//calculate the statistic and write them to the DIV tag
-	//calculate the maximum reach
+	//calculate the maximum reach for the dice
 	var maxreach = 0;
-	$('.inputfield').each( function(i, obj) {
+	//console.log('0reach: '+ maxreach);	
+	$('.inputfield_dice').each( function(i, obj) {
 		var objval = $('#'+obj.id).val();					
 		if (objval>0) {
 			for (i = 0; i < objval; i++) {
-				maxreach = maxreach + getMaxReach(obj.id);
+				maxreach += getMaxReach(obj.id);
+				//console.log('1reach: '+ maxreach);	
 			}
 		}		
 	});
+	maxreach += parseInt($('#rw').val(),10);
+	
 	//add the list entries to the list
-	console.log('Maximum reach: '+ maxreach);	
+	//console.log('Maximum reach: '+ maxreach);	
 	for (i = 0; i <= maxreach; i++) {
 		//calculate statistic for each reach	
 		//TODO: do the statistic calculation here
@@ -83,7 +106,7 @@ function calcStat() {
 function getMaxReach(objid) {
 	var result = Math.max.apply(Math,reichweite.getItem(objid));
 	//console.log(objid + '=' + result);
-	return result;
+	return parseInt(result,10);
 }
 
 //small Hash implementation

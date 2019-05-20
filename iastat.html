@@ -58,11 +58,16 @@
 	justify-content: flex-end;    
 }
 
-.inputfield {
+.inputfield,
+.inputfield_base,
+.inputfield_dice ,
+.inputfield_extrain,
+.inputfield_extraout {
 	font-size: 20px;
-	border-style: hidden;
+	border-style: none;
 	width: 45px;	
 	text-align: center; 
+	margin-right:7px;
 }
 
 .container {
@@ -102,47 +107,37 @@
 	<div id="config">
 		<div id="initstats" class="border">
 			<div class="headline">
-				Basiswerte
+				Initial values
 			</div>
 			<div class="container">
-				<img src="img/surge.png" id="surgei" class="dice" />&nbsp;<input type="text" size="1" name="surge" id="surge" value="0" class="inputfield"/>
-				<img src="img/strain.png" id="straini" class="dice"/>&nbsp;<input type="text" size="1" name="strain" id="strain" value="0" class="inputfield"/>
+				<img src="img/surge.png" id="surgei" class="dice" /><input type="text" size="1" name="surge" id="surge" value="0" class="inputfield_base"/>
+				<img src="img/strain.png" id="straini" class="dice"/><input type="text" size="1" name="strain" id="strain" value="0" class="inputfield_base"/>
 			</div>
 			<div class="container">
-				<img src="img/hit.png" id="hiti" class="dice" />&nbsp;<input type="text" size="1" name="hit" id="hit" value="0" class="inputfield"/>
-				<img src="img/rw.png" id="rwi" class="dice"/>&nbsp;<input type="text" size="1" name="rw" id="rw" value="0" class="inputfield"/>
+				<img src="img/hit.png" id="hiti" class="dice" /><input type="text" size="1" name="hit" id="hit" value="0" class="inputfield_base"/>
+				<img src="img/rw.png" id="rwi" class="dice"/><input type="text" size="1" name="rw" id="rw" value="0" class="inputfield_base"/>
 			</div>
 		</div>
 		<div id="dices" class="border">
 			<div class="headline">
-				Würfel
+				Dice
 			</div>
 			<div class="container">
-				<img src="img/black.jpg" id="blacki" class="dice" />&nbsp;<input type="text" size="1" name="black" id="black" value="0" class="inputfield"/>
-				<img src="img/white.jpg" id="whitei" class="dice"/>&nbsp;<input type="text" size="1" name="white" id="white" value="0" class="inputfield"/>
+				<img src="img/black.jpg" id="blacki" class="dice" /><input type="text" size="1" name="black" id="black" value="0" class="inputfield_dice"/>
+				<img src="img/white.jpg" id="whitei" class="dice"/><input type="text" size="1" name="white" id="white" value="0" class="inputfield_dice"/>
 			</div>
 			<br class="clear" />	
 			<div class="container">
-				<img src="img/red.jpg" id="redi" class="dice"/>&nbsp;<input type="text" size="1" name="red" id="red" value="0" class="inputfield"/>
-				<img src="img/green.jpg" id="greeni" class="dice"/>&nbsp;<input type="text" size="1" name="green" id="green" value="0" class="inputfield"/>
+				<img src="img/red.jpg" id="redi" class="dice"/><input type="text" size="1" name="red" id="red" value="0" class="inputfield_dice"/>
+				<img src="img/green.jpg" id="greeni" class="dice"/><input type="text" size="1" name="green" id="green" value="0" class="inputfield"/>
 			</div>			
 			<div class="container">
-				<img src="img/yellow.jpg" id="yellowi" class="dice"/>&nbsp;<input type="text" size="1" name="yellow" id="yellow" value="0" class="inputfield"/>
-				<img src="img/blue.jpg" id="bluei" class="dice"/>&nbsp;<input type="text" size="1" name="blue" id="blue" value="0" class="inputfield"/>		
+				<img src="img/yellow.jpg" id="yellowi" class="dice"/><input type="text" size="1" name="yellow" id="yellow" value="0" class="inputfield_dice"/>
+				<img src="img/blue.jpg" id="bluei" class="dice"/><input type="text" size="1" name="blue" id="blue" value="0" class="inputfield_dice"/>		
 			</div>
 		</div>
-		<div id="extraStats" class="border">	
-			<div class="extraStat">	
-				<div class="extraStatButtons">
-					<img src="img/surge.png" id="extrasurgei" class="dice" />&nbsp;<input type="text" size="1" name="extrasurge" id="extrasurge" value="0" class="inputfield"/>
-					<img src="img/strain.png" id="extrastraini" class="dice"/>&nbsp;<input type="text" size="1" name="extrastrain" id="extrastrain" value="0" class="inputfield"/>
-				</div>
-				<img src="img/arrowdown.png" />	
-				<div class="extraStatButtons">
-					<img src="img/hit.png" id="extrahiti" class="dice" />&nbsp;<input type="text" size="1" name="extrahit" id="hit" value="0" class="inputfield"/>
-					<img src="img/rw.png" id="extrarwi" class="dice"/>&nbsp;<input type="text" size="1" name="extrarw" id="extrarw" value="0" class="inputfield"/>
-				</div>
-			</div>
+		<div id="extraStats" class="border" style="display:none">	
+			
 		</div>
 		<div id="add" class="addButton">
 			<input type="button" value="+" id="add" onclick="addFields()" class="buttons" />			
@@ -155,6 +150,22 @@
 		</ul>	
 	</div>
 	</form>
-	
+
+<!-- html snippet for extra fields -->
+<div id="extraStatTemplate" style="display:none">
+	<div class="extraStat" id="extraStatXXX">	
+		<div class="extraStatButtons">
+			<img src="img/surge.png" id="extrasurgeXXXi" class="dice" /><input type="text" size="1" name="extrasurgeXXX" id="extrasurgeXXX" value="0" class="inputfield_extrain"/>
+			<img src="img/strain.png" id="extrastrainXXXi" class="dice"/><input type="text" size="1" name="extrastrainXXX" id="extrastrainXXX" value="0" class="inputfield_extrain"/>
+		</div>
+		<img src="img/arrowdown.png" />	
+		<div class="extraStatButtons">
+			<img src="img/hit.png" id="extrahitXXXi" class="dice" /><input type="text" size="1" name="extrahit" id="extrahitXXX" value="0" class="inputfield_extraout"/>
+			<img src="img/rw.png" id="extrarwXXXi" class="dice"/><input type="text" size="1" name="extrarwXXX" id="extrarwXXX" value="0" class="inputfield_extraout"/>
+		</div>
+	</div>	
+</div>
+
+
 </body>		
 </html>
