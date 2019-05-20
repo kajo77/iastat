@@ -45,8 +45,11 @@ function calcStat() {
 	var maxreach = 0;
 	$('.inputfield').each( function(i, obj) {
 		var objval = $('#'+obj.id).val();					
-		for (i = 0; i < objval; i++) {
-			maxreach = maxreach + getMaxReach(obj.id);
+		if (objval>0) {
+			var curMaxReach = getMaxReach(obj.id);
+			if(maxreach<curMaxReach) {
+				maxreach = curMaxReach;
+			}
 		}		
 	});
 	//add the list entries to the list
@@ -60,7 +63,92 @@ function calcStat() {
 }
 
 function getMaxReach(objid) {
-	var result = Math.max.apply(Math,reichweite.get(objid));
+	var result = Math.max.apply(Math,reichweite.getItem(objid));
 	//console.log(objid + '=' + result);
 	return result;
 }
+
+//small Hash implementation
+function Hash(obj)
+{
+    this.length = 0;
+    this.items = {};
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            this.items[p] = obj[p];
+            this.length++;
+        }
+    }
+
+    this.setItem = function(key, value)
+    {
+        var previous = undefined;
+        if (this.hasItem(key)) {
+            previous = this.items[key];
+        }
+        else {
+            this.length++;
+        }
+        this.items[key] = value;
+        return previous;
+    }
+
+    this.getItem = function(key) {
+        return this.hasItem(key) ? this.items[key] : undefined;
+    }
+
+    this.hasItem = function(key)
+    {
+        return this.items.hasOwnProperty(key);
+    }
+   
+    this.removeItem = function(key)
+    {
+        if (this.hasItem(key)) {
+            previous = this.items[key];
+            this.length--;
+            delete this.items[key];
+            return previous;
+        }
+        else {
+            return undefined;
+        }
+    }
+
+    this.keys = function()
+    {
+        var keys = [];
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                keys.push(k);
+            }
+        }
+        return keys;
+    }
+
+    this.values = function()
+    {
+        var values = [];
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                values.push(this.items[k]);
+            }
+        }
+        return values;
+    }
+
+    this.each = function(fn) {
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                fn(k, this.items[k]);
+            }
+        }
+    }
+
+    this.clear = function()
+    {
+        this.items = {}
+        this.length = 0;
+    }
+}
+     
