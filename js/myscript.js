@@ -83,7 +83,8 @@ function calcStat() {
 	var maxreach = 0;
 	//console.log('0reach: '+ maxreach);	
 	$('.inputfield_dice').each( function(i, obj) {
-		var objval = $('#'+obj.id).val();					
+		var objval = $('#'+obj.id).val();		
+		console.log(obj.id);			
 		if (objval>0) {
 			for (i = 0; i < objval; i++) {
 				maxreach += getMaxReach(obj.id);
@@ -105,7 +106,7 @@ function calcStat() {
 
 function getMaxReach(objid) {
 	var result = Math.max.apply(Math,reichweite.getItem(objid));
-	//console.log(objid + '=' + result);
+	console.log(objid + '=' + result);
 	return parseInt(result,10);
 }
 
